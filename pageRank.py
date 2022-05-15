@@ -4,7 +4,7 @@ Created on Sat May 14 19:39:36 2022
 
 @author: Edward
 """
-import os;
+import os
 
 def pageRank(damp, Nodes, connections):
     finalRanks = []
@@ -19,11 +19,13 @@ def pageRank(damp, Nodes, connections):
         finalRanks.append(nodeRank)
         
     return finalRanks
-        
-
+#-----------Controls----------------------------------------------------------#   
+#-----------------------------------------------------------------------------#
 damp = 0.7
+epsilon = 0.0001
 Nodes = [[1, 1, 1], [2, 1, 2], [3, 1, 1], [4, 1, 1], [5, 1, 1]] #Format is [Node #, PageRank, outgoingCount]
 connections = [(1, 2), (2, 3), (2, 5), (3, 1), (4, 5), (5, 5)] #Format is (Going from node, Coming to node)
+#-----------------------------------------------------------------------------#
 currentRanks = pageRank(damp, Nodes, connections)
 notConverged = True
 numOfIterations = 1
@@ -31,7 +33,7 @@ while notConverged:
     sumOfRanks = 0
     for rank in currentRanks:
         sumOfRanks += rank
-    if sumOfRanks <= 1.0001:
+    if sumOfRanks <= (1 + epsilon):
         notConverged = False
     else:
         for idx, node in enumerate(Nodes):
